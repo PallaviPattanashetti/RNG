@@ -11,7 +11,6 @@ let lastName = document.getElementById("lastName");
 let CodestackeEmail = document.getElementById("CodestackeEmail");
 let Email = document.getElementById("Email");
 let RandomBtn = document.getElementById("RandomBtn");
-
 let previousNames = [];
 function UpdatePreviousNamesList() {
     let previousList = document.getElementById("previousNames");
@@ -19,6 +18,7 @@ function UpdatePreviousNamesList() {
     let listItems = "";
     for (let s of previousNames) {
         listItems += `<li>${s.firstName} ${s.lastName}</li>`;
+
     }
     previousList.innerHTML = listItems;
 }
