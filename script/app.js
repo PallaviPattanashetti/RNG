@@ -25,10 +25,8 @@ function UpdatePreviousNamesList() {
 RandomBtn.addEventListener("click", () => {
     getData().then(students => {
         let randomStudent = RandomNameGenerator(students);
-
         previousNames.unshift(randomStudent);
         if (previousNames.length > 5) previousNames.pop();
-
         firstName.innerText = "First Name: " + randomStudent.firstName;
         lastName.innerText = "Last Name: " + randomStudent.lastName;
         CodestackeEmail.innerText = "Codestack Email: " + randomStudent.CodeStackEmail;
