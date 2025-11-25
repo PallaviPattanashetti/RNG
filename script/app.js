@@ -6,20 +6,46 @@ function getData() {
             return data.students;
         });
 }
-
 let firstName = document.getElementById("firstName");
 let lastName = document.getElementById("lastName");
 let CodestackeEmail = document.getElementById("CodestackeEmail");
 let Email = document.getElementById("Email");
-let GenerateBtn = document.getElementById("GenerateBtn");
-let StudentBtn = document.getElementById("StudentBtn");
+let RandomBtn = document.getElementById("RandomBtn");
+//let StudentBtn = document.getElementById("StudentBtn");
 
+
+let previousNames = [];
+
+function UpdatePreviousNamesList() {
+    let previousList = document.getElementById("previousNames");
+
+    let listItems = "";
+    for (let s of previousNames) {
+        listItems += `<li>${s.firstName} ${s.lastName}</li>`;
+    }
+    previousList.innerHTML = listItems;
+
+}
+RandomBtn.addEventListener("click", () => {
+    getData().then(students => {
+        let randomStudent = RandomNameGenerator(students);
+        // Add to previous names list (max 5)
+        previousNames.unshift(randomStudent);
+        if (previousNames.length > 5) previousNames.pop();
+        // Display student info
+        firstName.innerText = "First Name: " + randomStudent.firstName;
+        lastName.innerText = "Last Name: " + randomStudent.lastName;
+        CodestackeEmail.innerText = "Codestack Email: " + randomStudent.CodeStackEmail;
+        Email.innerText = "Email: " + randomStudent.Email;
+        // Display previous 5 names
+        UpdatePreviousNamesList();
+    });
+});
 function RandomNameGenerator(students) {
     let randomIndex = Math.floor(Math.random() * students.length);
     console.log([randomIndex]);
     return students[randomIndex]
 }
-
 GenerateBtn.addEventListener("click", () => {
     getData().then(students => {
         let student = RandomNameGenerator(students);
@@ -30,28 +56,6 @@ GenerateBtn.addEventListener("click", () => {
         CodestackeEmail.innerText = "Codestack Email: " + randomStudent.CodeStackEmail;
         Email.innerText = "Email: " + randomStudent.Email;
 
-    });
-});
-
-let currentIndex = 0;
-function StudentNameGenerator(students) {
-    const student = students[currentIndex];
-    currentIndex = (currentIndex + 1) % students.length;
-    return student;
-}
-
-StudentBtn.addEventListener("click", () => {
-    getData().then(students => {
-        let student = StudentNameGenerator(students);
-        firstName.innerText = "First Name: " + student.firstName;
-        lastName.innerText = "Last Name: " + student.lastName;
-        CodestackeEmail.innerText = "Codestack Email: " + student.CodeStackEmail;
-        Email.innerText = "Email: " + student.Email;
-        
-        firstName.style.color = "blue";
-    lastName.style.color = "green";
-    CodestackeEmail.style.color = "blue";
-    Email.style.color = "green";
     });
 });
 
