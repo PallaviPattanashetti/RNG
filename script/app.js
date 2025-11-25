@@ -43,11 +43,15 @@ function StudentNameGenerator(students) {
 StudentBtn.addEventListener("click", () => {
     getData().then(students => {
         let student = StudentNameGenerator(students);
-
         firstName.innerText = "First Name: " + student.firstName;
         lastName.innerText = "Last Name: " + student.lastName;
         CodestackeEmail.innerText = "Codestack Email: " + student.CodeStackEmail;
         Email.innerText = "Email: " + student.Email;
+        
+        firstName.style.color = "blue";
+    lastName.style.color = "green";
+    CodestackeEmail.style.color = "blue";
+    Email.style.color = "green";
     });
 });
 
