@@ -11,11 +11,8 @@ let lastName = document.getElementById("lastName");
 let CodestackeEmail = document.getElementById("CodestackeEmail");
 let Email = document.getElementById("Email");
 let RandomBtn = document.getElementById("RandomBtn");
-//let StudentBtn = document.getElementById("StudentBtn");
-
 
 let previousNames = [];
-
 function UpdatePreviousNamesList() {
     let previousList = document.getElementById("previousNames");
 
@@ -24,20 +21,18 @@ function UpdatePreviousNamesList() {
         listItems += `<li>${s.firstName} ${s.lastName}</li>`;
     }
     previousList.innerHTML = listItems;
-
 }
 RandomBtn.addEventListener("click", () => {
     getData().then(students => {
         let randomStudent = RandomNameGenerator(students);
-        // Add to previous names list (max 5)
+
         previousNames.unshift(randomStudent);
         if (previousNames.length > 5) previousNames.pop();
-        // Display student info
+
         firstName.innerText = "First Name: " + randomStudent.firstName;
         lastName.innerText = "Last Name: " + randomStudent.lastName;
         CodestackeEmail.innerText = "Codestack Email: " + randomStudent.CodeStackEmail;
         Email.innerText = "Email: " + randomStudent.Email;
-        // Display previous 5 names
         UpdatePreviousNamesList();
     });
 });
@@ -49,7 +44,6 @@ function RandomNameGenerator(students) {
 GenerateBtn.addEventListener("click", () => {
     getData().then(students => {
         let student = RandomNameGenerator(students);
-        //console.log(randomStudent);
         let randomStudent = RandomNameGenerator(students);
         firstName.innerText = "First Name: " + randomStudent.firstName;
         lastName.innerText = "Last Name: " + randomStudent.lastName;
